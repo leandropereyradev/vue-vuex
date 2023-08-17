@@ -16,11 +16,14 @@
   <h1>MapState</h1>
   <h2>mapState - count: {{ count }}</h2>
   <h2>mapState - lastMutation: {{ lastMutation }}</h2>
+
+  <h2>Direct Getter by mapGetters: {{ squareCount }}</h2>
+  <h2>Direct Getter: {{ $store.getters.squareCount }}</h2>
 </template>
 
 <script>
 
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 
 export default {
   // computed: mapState(['count'])
@@ -29,11 +32,12 @@ export default {
     countComputed() {
       return this.$store.state.count
     },
-    ...mapState(['count', 'lastMutation', 'isLoading'])
+    ...mapState(['count', 'lastMutation', 'isLoading']),
     // ...mapState({
     //   count: state => state.count,
     //   lastMutation: state => state.lastMutation
     // })
+    ...mapGetters(['squareCount'])
   },
   methods: {
     increment() {

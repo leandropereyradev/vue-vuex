@@ -34,4 +34,11 @@ export default createStore({
       commit("setLoading", false);
     },
   },
+
+  //Pueden ser llamados en cualquier parte de la aplicación
+  getters: {
+    squareCount(state) {
+      return state.count * state.count;
+    },
+  },
 });
