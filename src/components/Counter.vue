@@ -2,11 +2,13 @@
 <template>
   <h1>Counter en Vuex</h1>
   <h2>Direct access: {{ $store.state.count }}</h2>
-  <h2>Computed access: {{ countComputed }}</h2>
+
+  <h1 v-if="$store.state.isLoading">Loading...</h1>
+  <h2 v-else>Computed access: {{ countComputed }}</h2>
 
   <button @click="increment">+1</button>
   <button @click="incrementBy(5)">+5</button>
-  <button>Random</button>
+  <button @click="incrementRandomInt">Random</button>
 
   <hr>
 
@@ -39,6 +41,9 @@ export default {
     incrementBy(value) {
       this.$store.commit('incrementBy', value)
     },
+    incrementRandomInt() {
+      this.$store.dispatch('incrementRandomInt')
+    }
   }
 
 }
