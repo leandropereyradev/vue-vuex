@@ -18,20 +18,20 @@ export default createStore({
       state.count += value;
       state.lastMutation = "IncrementBy" + value;
     },
-    isLoading(state, value) {
+    setLoading(state, value) {
       state.isLoading = value;
-      console.log(value);
+      state.lastMutation = "setLoading: " + value;
     },
   },
 
   //Permiten hacer peticiones al BackEnd al ser Asíncronas
   actions: {
-    async incrementRandomInt(context) {
-      context.commit("isLoading", true);
+    async incrementRandomInt({ commit }) {
+      commit("setLoading", true);
       const randomInt = await getRandomInt();
 
-      context.commit("incrementBy", randomInt);
-      context.commit("isLoading", false);
+      commit("incrementBy", randomInt);
+      commit("setLoading", false);
     },
   },
 });

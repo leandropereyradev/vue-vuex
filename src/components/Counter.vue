@@ -3,12 +3,12 @@
   <h1>Counter en Vuex</h1>
   <h2>Direct access: {{ $store.state.count }}</h2>
 
-  <h1 v-if="$store.state.isLoading">Loading...</h1>
+  <h1 v-if="isLoading">Loading...</h1>
   <h2 v-else>Computed access: {{ countComputed }}</h2>
 
   <button @click="increment">+1</button>
   <button @click="incrementBy(5)">+5</button>
-  <button @click="randomInt">Random</button>
+  <button @click="randomInt" :disabled="isLoading && true">Random</button>
   <!-- <button @click="incrementRandomInt">Random</button> -->
 
   <hr>
@@ -29,7 +29,7 @@ export default {
     countComputed() {
       return this.$store.state.count
     },
-    ...mapState(['count', 'lastMutation'])
+    ...mapState(['count', 'lastMutation', 'isLoading'])
     // ...mapState({
     //   count: state => state.count,
     //   lastMutation: state => state.lastMutation
