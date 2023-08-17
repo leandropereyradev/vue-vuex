@@ -8,7 +8,8 @@
 
   <button @click="increment">+1</button>
   <button @click="incrementBy(5)">+5</button>
-  <button @click="incrementRandomInt">Random</button>
+  <button @click="randomInt">Random</button>
+  <!-- <button @click="incrementRandomInt">Random</button> -->
 
   <hr>
 
@@ -19,7 +20,7 @@
 
 <script>
 
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   // computed: mapState(['count'])
@@ -41,9 +42,14 @@ export default {
     incrementBy(value) {
       this.$store.commit('incrementBy', value)
     },
-    incrementRandomInt() {
-      this.$store.dispatch('incrementRandomInt')
-    }
+    // incrementRandomInt() {
+    //   this.$store.dispatch('incrementRandomInt')
+    // }
+    // ...mapActions(['incrementRandomInt'])
+    ...mapActions({
+      randomInt: 'incrementRandomInt'
+      //Con esta forma, podemos llamar esta acción desde otro método con this.randomInt()
+    })
   }
 
 }
