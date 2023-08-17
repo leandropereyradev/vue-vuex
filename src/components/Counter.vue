@@ -4,6 +4,10 @@
   <h2>Direct access: {{ $store.state.count }}</h2>
   <h2>Computed access: {{ countComputed }}</h2>
 
+  <button @click="increment">+1</button>
+  <button @click="incrementBy(5)">+5</button>
+  <button>Random</button>
+
   <hr>
 
   <h1>MapState</h1>
@@ -27,6 +31,14 @@ export default {
     //   count: state => state.count,
     //   lastMutation: state => state.lastMutation
     // })
+  },
+  methods: {
+    increment() {
+      this.$store.commit('increment')
+    },
+    incrementBy(value) {
+      this.$store.commit('incrementBy', value)
+    },
   }
 
 }

@@ -5,4 +5,15 @@ export default createStore({
     count: 1,
     lastMutation: "none",
   },
+
+  mutations: {
+    increment(state) {
+      state.count++;
+      state.lastMutation = "Increment";
+    },
+    incrementBy(state, value) {
+      state.count += value;
+      state.lastMutation = "IncrementBy";
+    },
+  },
 });
