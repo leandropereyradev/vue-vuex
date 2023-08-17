@@ -1,48 +1,22 @@
-import getRandomInt from "@/helpers/getRandomInt";
+import state from "./state";
+import * as mutations from "./mutations";
+import * as actions from "./actions";
+import * as getters from "./getters";
 
 const counterStore = {
   //namespaced evita que se configure de manera global
   namespaced: true,
 
-  state: () => ({
-    count: 1,
-    lastMutation: "none",
-    isLoading: false,
-  }),
+  state,
 
   //No permiten hacer peticiones al BackEnd porque son síncronas (funcionan en el entorno cliente)
-  mutations: {
-    increment(state) {
-      state.count++;
-      state.lastMutation = "Increment";
-    },
-    incrementBy(state, value) {
-      state.count += value;
-      state.lastMutation = "IncrementBy" + value;
-    },
-    setLoading(state, value) {
-      state.isLoading = value;
-      state.lastMutation = "setLoading: " + value;
-    },
-  },
+  mutations,
 
   //Permiten hacer peticiones al BackEnd al ser Asíncronas
-  actions: {
-    async incrementRandomInt({ commit }) {
-      commit("setLoading", true);
-      const randomInt = await getRandomInt();
-
-      commit("incrementBy", randomInt);
-      commit("setLoading", false);
-    },
-  },
+  actions,
 
   //Pueden ser llamados en cualquier parte de la aplicación
-  getters: {
-    squareCount(state) {
-      return state.count * state.count;
-    },
-  },
+  getters,
 };
 
 export default counterStore;
